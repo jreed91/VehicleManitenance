@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <h3>Maintenance</h3>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Mileage</th>
+            <th scope="col">Location</th>
+            <th scope="col">Price</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let maintenace of maintenaceItems">
+            <td>{{maintenace.date}}</td>
+            <td>{{maintenace.mileage}}</td>
+            <td>{{maintenace.location}}</td>
+            <td>{{maintenace.price}}</td>
+            <td>{{maintenace.type}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+

@@ -1,0 +1,32 @@
+<div class="container">
+  <form [formGroup]="addVehicleForm" (ngSubmit)="submitForm()">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Vehicle Name" formControlName="name">
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="col">
+            <select class="form-control" formControlName="year" (change)="yearChanged()">
+              <option >Select a year...</option>
+              <option  *ngFor="let year of years" [value]="year">{{year}}</option>
+            </select>
+            <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()">
+                <option >Select a Manufacturer...</option>
+                <option  *ngFor="let item of manufacturersAfterChangeEvent" [value]="item.manufacturer">{{item.manufacturer}}</option>
+              </select>
+            <select class="form-control" formControlName="model" (change)="modelChanged()">
+                <option >Select a Model...</option>
+                <option  *ngFor="let item of modelsAfterChangeEvent" [value]="item.model">{{item.model}}</option>
+            </select>
+            <select class="form-control" formControlName="trim">
+                <option >Select a Trim...</option>
+                <option  *ngFor="let item of trimsAfterChangeEvent" [value]="item.trim">{{item.trim}}</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <p>heroForm value: {{ addVehicleForm.value | json}}</p>
+</div>
