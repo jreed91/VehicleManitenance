@@ -11,8 +11,11 @@ export class MaintenanceService {
   constructor() { }
 
   getMaintenanceItemsForVehicle(vehicleId: number): Observable<Maintenance[]> {
-    console.log(MAINTENANCEITEMS);
-    return of(MAINTENANCEITEMS.filter(mainteance => mainteance.vehicle = vehicleId));
+    return of(MAINTENANCEITEMS.filter(mainteance => mainteance.vehicle == vehicleId));
+  }
+
+  getAllMaintenanceTypes(): Observable<String[]> {
+    return of(MAINTENANCEITEMS.map(value => value.type).filter((value, index, self) => self.indexOf(value) === index));
   }
 
 }

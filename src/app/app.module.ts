@@ -13,6 +13,7 @@ import { MaintenanceListComponent } from './maintenance-list/maintenance-list.co
 import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { SelectVehicleComponent } from './select-vehicle/select-vehicle.component';
 import { VehicleDataService } from './vehicledata.service';
+import { AddMaintenanceComponent } from './add-maintenance/add-maintenance.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { VehicleDataService } from './vehicledata.service';
     MaintenanceDetailComponent,
     MaintenanceListComponent,
     VehicleAddComponent,
-    SelectVehicleComponent
+    SelectVehicleComponent,
+    AddMaintenanceComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import { VehicleDataService } from './vehicledata.service';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [VehicleService, VehicleDataService, VehicleAddComponent],
+  providers: [VehicleService, VehicleDataService, VehicleAddComponent, MaintenanceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,22 @@
+<div class="container">
+    <form [formGroup]="addMaintenanceForm" (ngSubmit)="submitForm()">
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Select a Date" formControlName="date">
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Mileage" formControlName="mileage">
+                <input type="text" class="form-control" placeholder="Location" formControlName="location">
+                <input type="text" class="form-control" placeholder="Price" formControlName="price">
+                <select type="checkbox" class="form-control" formControlName="type" >
+                    <option >Select a Maintenance Type...</option>
+                    <option *ngFor="let item of maintenanceTypes" [value]="item">{{item}}</option>
+                </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+  <p>heroForm value: {{ addMaintenanceForm.value | json}}</p>
