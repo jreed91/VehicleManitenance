@@ -28,6 +28,7 @@ export class VehicleAddComponent implements OnInit {
 
   createForm() {
     this.addVehicleForm = this.fb.group({
+      id: '',
       name: '',
       year: '',
       manufacturer: '',
@@ -68,7 +69,6 @@ export class VehicleAddComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.addVehicleForm.value);
     this.vehicleService.saveVehicle(this.addVehicleForm.value);
   }
 

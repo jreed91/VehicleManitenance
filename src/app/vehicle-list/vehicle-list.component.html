@@ -6,7 +6,7 @@
     <a routerLink="add" class="btn btn-primary">+</a>
   </div>
   <div class="row">
-      <ng-container *ngFor="let vehicle of vehicles">
+      <ng-container *ngFor="let vehicle of vehicles | async">
           <div class="col-sm-6">
               <div class="card">
                   <img class="card-img-top" src="{{vehicle.image}}" alt="Card image cap">

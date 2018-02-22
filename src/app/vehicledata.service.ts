@@ -8,6 +8,8 @@ import { Vehicle } from './vehicle';
 
 @Injectable()
 export class VehicleDataService {
+  baseUrl: String;
+
 
   years: String[];
 
@@ -18,6 +20,7 @@ export class VehicleDataService {
     '1996',
     '1997'
   ];
+  this.baseUrl = 'www.carqueryapi.com';
 }
 
   getYears(): Observable<String[]> {

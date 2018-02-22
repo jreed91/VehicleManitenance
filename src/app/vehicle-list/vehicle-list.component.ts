@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
 import { Vehicle } from '../vehicle';
 import { VehicleService } from '../vehicle.service';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -10,7 +12,7 @@ import { VehicleService } from '../vehicle.service';
 })
 export class VehicleListComponent implements OnInit {
 
-  vehicles: Vehicle[];
+  vehicles: Observable<Vehicle[]>;
 
   constructor(
     private vehicleService: VehicleService) { }
@@ -20,7 +22,6 @@ export class VehicleListComponent implements OnInit {
   }
 
   getVehicles(): void {
-    this.vehicleService.getVehicles()
-    .subscribe(vehicles => this.vehicles = vehicles);
+    this.vehicles = this.vehicleService.getVehicles();
   }
 }

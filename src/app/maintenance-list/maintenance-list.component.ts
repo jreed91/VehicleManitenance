@@ -3,6 +3,9 @@ import { Vehicle } from '../vehicle';
 import { VehicleService } from '../vehicle.service';
 import { MaintenanceService } from '../maintenance.service';
 import { Maintenance } from '../maintenance';
+import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-maintenance-list',
@@ -10,16 +13,17 @@ import { Maintenance } from '../maintenance';
   styleUrls: ['./maintenance-list.component.css']
 })
 export class MaintenanceListComponent implements OnInit {
-  @Input() vehicle: number;
-  maintenaceItems: Maintenance[];
+  maintenaceItems: Observable<Maintenance[]>;
 
-  constructor(private maintenanceService: MaintenanceService) { }
+  constructor(private maintenanceService: MaintenanceService,
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit() {
-    this.getMaintenanceItemsForVehicle(this.vehicle);
+    this.getMaintenanceItemsForVehicle();
   }
-  getMaintenanceItemsForVehicle(vehicleId: number): void {
-    this.maintenanceService.getMaintenanceItemsForVehicle(vehicleId)
-    .subscribe(maintenaceItems => this.maintenaceItems = maintenaceItems);
+  getMaintenanceItemsForVehicle(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.maintenaceItems = this.maintenanceService.getMaintenanceItemsForVehicle(id);
   }
 }

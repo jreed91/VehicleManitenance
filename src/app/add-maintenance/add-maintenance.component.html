@@ -2,7 +2,8 @@
     <form [formGroup]="addMaintenanceForm" (ngSubmit)="submitForm()">
         <div class="form-row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Select a Date" formControlName="date">
+            <my-date-picker name="date" [options]="myDatePickerOptions"
+                    formControlName="date"></my-date-picker>
           </div>
         </div>
         <div class="form-row">
