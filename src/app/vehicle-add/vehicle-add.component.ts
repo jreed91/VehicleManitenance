@@ -4,6 +4,7 @@ import { VehicleDataService } from '../vehicledata.service';
 import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Years } from '../vehicleDataInterface';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -14,7 +15,8 @@ export class VehicleAddComponent implements OnInit {
   addVehicleForm: FormGroup;
 
   vehicles: Vehicle[];
-  years: String[];
+  years: Years;
+  yearsArray: String[];
   keys: String[];
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
@@ -50,7 +52,21 @@ export class VehicleAddComponent implements OnInit {
 
   getYears(): void {
     this.vehicleDataService.getYears()
-    .subscribe(years => this.years = years);
+    .subscribe(resp => {
+      const keys = resp.headers.keys();
+      // access the body directly, which is typed as `Config`.
+      this.years = { ... resp.body };
+    });
+    console.log(this.years);
+    this.buildYearsArray(this.years);
+  }
+
+  buildYearsArray(years: Years) {
+    let i: number;
+    for (i = +years.min_year; i <= +years.max_year; i++) {
+      this.yearsArray.push(i.toString());
+    }
+    console.log(this.yearsArray);
   }
 
   yearChanged() {

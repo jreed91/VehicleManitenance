@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { VEHICLEDATA } from './mock-vehicledata';
 import { Vehicle } from './vehicle';
+import { HttpResponse } from '@angular/common/http/src/response';
+import { Years } from './vehicleDataInterface';
 
 @Injectable()
 export class VehicleDataService {
@@ -13,18 +16,13 @@ export class VehicleDataService {
 
   years: String[];
 
-  constructor() {
-    this.years = [
-    '1994',
-    '1995',
-    '1996',
-    '1997'
-  ];
-  this.baseUrl = 'www.carqueryapi.com';
+  constructor(private http: HttpClient) {
+    this.getYears();
+    this.baseUrl = 'https://www.carqueryapi.com/api/0.3/';
 }
 
-  getYears(): Observable<String[]> {
-    return of(this.years);
+  getYears(): Observable<HttpResponse<Years>> {
+    return this.http.get<Years>(this.baseUrl + '?cmd=getYears', {observe: 'response'});
   }
 
   getVehicleData(): Observable<Vehicle[]> {
