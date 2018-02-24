@@ -9,11 +9,11 @@
           <div class="col">
             <select class="form-control" formControlName="year" (change)="yearChanged()">
               <option >Select a year...</option>
-              <option  *ngFor="let year of years" [value]="year">{{year}}</option>
+              <option  *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
             </select>
             <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()">
                 <option >Select a Manufacturer...</option>
-                <option  *ngFor="let item of manufacturersAfterChangeEvent" [value]="item.manufacturer">{{item.manufacturer}}</option>
+                <option  *ngFor="let item of makes.Results" [value]="item.Make_Name">{{item.Make_Name}}</option>
               </select>
             <select class="form-control" formControlName="model" (change)="modelChanged()">
                 <option >Select a Model...</option>

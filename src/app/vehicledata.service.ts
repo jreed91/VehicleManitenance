@@ -7,22 +7,29 @@ import { of } from 'rxjs/observable/of';
 import { VEHICLEDATA } from './mock-vehicledata';
 import { Vehicle } from './vehicle';
 import { HttpResponse } from '@angular/common/http/src/response';
-import { Years } from './vehicleDataInterface';
+import { Years, Make } from './vehicleDataInterface';
 
 @Injectable()
 export class VehicleDataService {
   baseUrl: String;
-
-
-  years: String[];
+  years: Years;
 
   constructor(private http: HttpClient) {
     this.getYears();
-    this.baseUrl = 'https://www.carqueryapi.com/api/0.3/';
+    this.getMakes();
+    this.baseUrl = 'https://vpic.nhtsa.dot.gov/api/vehicles/';
 }
 
-  getYears(): Observable<HttpResponse<Years>> {
-    return this.http.get<Years>(this.baseUrl + '?cmd=getYears', {observe: 'response'});
+  getYears(): Years {
+    var date = new Date()
+    var thisYear = date.getFullYear().toString();
+    this.years = {min_year: "1941", max_year: thisYear};
+
+    return this.years
+  }
+
+  getMakes(): Observable<HttpResponse<Make>> {
+    return this.http.get<Make>(this.baseUrl + 'getallmakes?format=json', {observe: 'response'});
   }
 
   getVehicleData(): Observable<Vehicle[]> {

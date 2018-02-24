@@ -4,7 +4,8 @@ import { VehicleDataService } from '../vehicledata.service';
 import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Years } from '../vehicleDataInterface';
+import { Years, Make } from '../vehicleDataInterface';
+import { Observable } from '@firebase/util';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -16,7 +17,8 @@ export class VehicleAddComponent implements OnInit {
 
   vehicles: Vehicle[];
   years: Years;
-  yearsArray: String[];
+  makes: Make;
+  yearsArray: Array<String>;
   keys: String[];
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
@@ -29,6 +31,7 @@ export class VehicleAddComponent implements OnInit {
     }
 
   createForm() {
+    this.yearsArray = [];
     this.addVehicleForm = this.fb.group({
       id: '',
       name: '',
@@ -42,6 +45,7 @@ export class VehicleAddComponent implements OnInit {
   ngOnInit() {
     this.getManufacturers();
     this.getYears();
+    this.getMakes();
     this.keys = Object.keys(this.vehicles);
   }
 
@@ -51,13 +55,7 @@ export class VehicleAddComponent implements OnInit {
   }
 
   getYears(): void {
-    this.vehicleDataService.getYears()
-    .subscribe(resp => {
-      const keys = resp.headers.keys();
-      // access the body directly, which is typed as `Config`.
-      this.years = { ... resp.body };
-    });
-    console.log(this.years);
+    this.years = this.vehicleDataService.getYears();
     this.buildYearsArray(this.years);
   }
 
@@ -66,7 +64,15 @@ export class VehicleAddComponent implements OnInit {
     for (i = +years.min_year; i <= +years.max_year; i++) {
       this.yearsArray.push(i.toString());
     }
-    console.log(this.yearsArray);
+  }
+
+  getMakes(): void {
+    this.vehicleDataService.getMakes()
+    .subscribe(resp => {
+      const keys = resp.headers.keys();
+      // access the body directly, which is typed as `Config`.
+      this.makes = resp.body;
+    });
   }
 
   yearChanged() {
