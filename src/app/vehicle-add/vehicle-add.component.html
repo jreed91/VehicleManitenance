@@ -7,21 +7,17 @@
       </div>
       <div class="form-row">
           <div class="col">
-            <select class="form-control" formControlName="year" (change)="yearChanged()">
+            <select class="form-control" formControlName="year">
               <option >Select a year...</option>
               <option  *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
             </select>
-            <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()">
+            <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()" *ngIf="makes">
                 <option >Select a Manufacturer...</option>
                 <option  *ngFor="let item of makes.Results" [value]="item.Make_Name">{{item.Make_Name}}</option>
               </select>
-            <select class="form-control" formControlName="model" (change)="modelChanged()">
+            <select class="form-control" formControlName="model"  *ngIf="models">
                 <option >Select a Model...</option>
-                <option  *ngFor="let item of modelsAfterChangeEvent" [value]="item.model">{{item.model}}</option>
-            </select>
-            <select class="form-control" formControlName="trim">
-                <option >Select a Trim...</option>
-                <option  *ngFor="let item of trimsAfterChangeEvent" [value]="item.trim">{{item.trim}}</option>
+                <option  *ngFor="let item of models.Results" [value]="item.Model_Name">{{item.Model_Name}}</option>
             </select>
           </div>
         </div>

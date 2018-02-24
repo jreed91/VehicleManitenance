@@ -5,7 +5,6 @@ import { of } from 'rxjs/observable/of';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Vehicle } from './vehicle';
-import { VEHICLES } from './mock-vehicles';
 
 @Injectable()
 export class VehicleService {

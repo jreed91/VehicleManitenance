@@ -4,7 +4,7 @@ import { VehicleDataService } from '../vehicledata.service';
 import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Years, Make } from '../vehicleDataInterface';
+import { Years, Make, Model } from '../vehicleDataInterface';
 import { Observable } from '@firebase/util';
 
 @Component({
@@ -20,6 +20,8 @@ export class VehicleAddComponent implements OnInit {
   makes: Make;
   yearsArray: Array<String>;
   keys: String[];
+  models: Model;
+
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
   trimsAfterChangeEvent = [];
@@ -33,20 +35,16 @@ export class VehicleAddComponent implements OnInit {
   createForm() {
     this.yearsArray = [];
     this.addVehicleForm = this.fb.group({
-      id: '',
       name: '',
       year: '',
       manufacturer: '',
-      model: '',
-      trim: ''
+      model: ''
     });
   }
 
   ngOnInit() {
-    this.getManufacturers();
     this.getYears();
     this.getMakes();
-    this.keys = Object.keys(this.vehicles);
   }
 
   getManufacturers(): void {
@@ -69,25 +67,26 @@ export class VehicleAddComponent implements OnInit {
   getMakes(): void {
     this.vehicleDataService.getMakes()
     .subscribe(resp => {
+      
       const keys = resp.headers.keys();
       // access the body directly, which is typed as `Config`.
       this.makes = resp.body;
     });
   }
 
-  yearChanged() {
-    const year = this.addVehicleForm.get('year').value;
-    this.manufacturersAfterChangeEvent = this.vehicles.filter(p => p.year == year);
+  getModelsforYearandMake(selectedYear: String, selectedMake: String) {
+    this.vehicleDataService.getModelsforYearandMake(selectedYear, selectedMake)
+    .subscribe(resp => {
+      const keys = resp.headers.keys();
+      console.log(resp.body);
+      this.models = resp.body;
+    });
   }
 
   manufacturerChanged() {
     const manufacturer = this.addVehicleForm.get('manufacturer').value;
-    this.modelsAfterChangeEvent = this.vehicles.filter(p => p.manufacturer == manufacturer);
-  }
-
-  modelChanged() {
-    const model = this.addVehicleForm.get('model').value;
-    this.trimsAfterChangeEvent = this.vehicles.filter(p => p.model == model);
+    const year  = this.addVehicleForm.get('year').value;
+    this.getModelsforYearandMake(year, manufacturer);
   }
 
   submitForm() {
