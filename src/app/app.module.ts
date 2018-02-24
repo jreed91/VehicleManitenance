@@ -19,6 +19,8 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     MyDatePickerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthModule
   ],
   providers: [VehicleService, VehicleDataService, VehicleAddComponent, MaintenanceService],
   bootstrap: [AppComponent]

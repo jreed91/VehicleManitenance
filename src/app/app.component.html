@@ -12,10 +12,18 @@
               <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+                <div *ngIf="afAuth.authState | async as user">
+                  {{user.uid}}
+                    <h1>Hello {{ user.displayName }}!</h1>
+                    <button (click)="logout()">Logout</button>
+                  </div>
+                  <ng-template #showLogin>
+                    <p>Please login.</p>
+                    <button (click)="login()">Login with Google</button>
+                  </ng-template>
             </li>
           </ul>
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="afAuth.authState | async as user; else showLogin"></router-outlet>
