@@ -47,11 +47,6 @@ export class VehicleAddComponent implements OnInit {
     this.getMakes();
   }
 
-  getManufacturers(): void {
-    this.vehicleDataService.getVehicleData()
-    .subscribe(vehicles => this.vehicles = vehicles);
-  }
-
   getYears(): void {
     this.years = this.vehicleDataService.getYears();
     this.buildYearsArray(this.years);
