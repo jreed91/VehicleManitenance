@@ -5,6 +5,10 @@ import { of } from 'rxjs/observable/of';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { Vehicle } from './vehicle';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireStorage } from 'angularfire2/storage';
+
+
 
 @Injectable()
 export class VehicleService {
@@ -12,9 +16,15 @@ export class VehicleService {
   private vehicleDoc: AngularFirestoreDocument<Vehicle>;
   vehicle: Observable<Vehicle>;
   vehicles: Observable<Vehicle[]>;
+  user: String;
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
 
-  constructor(private afs: AngularFirestore) {
-    this.vehiclesCollection = afs.collection<Vehicle>('vehicles');
+  constructor(private afs: AngularFirestore,
+    public afAuth: AngularFireAuth,
+    private storage: AngularFireStorage) {
+    this.user = this.afAuth.auth.currentUser.uid;
+    this.vehiclesCollection = afs.collection<Vehicle>('vehicles', ref => ref.where('user', '==', this.user));
     this.vehicles = this.vehiclesCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Vehicle;
@@ -35,5 +45,21 @@ export class VehicleService {
 
   saveVehicle(vehicle: Vehicle): void {
     this.vehiclesCollection.add(vehicle);
+  }
+
+  uploadImage(event): Observable<String> {
+
+    const file = event.target.files[0];
+    const filePath = this.user + '/images';
+    const task = this.storage.upload(filePath, file);
+    // observe percentage changes
+     this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    this.downloadURL = task.downloadURL();
+
+   
+
+
+    return this.downloadURL;
   }
 }

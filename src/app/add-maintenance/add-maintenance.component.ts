@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MaintenanceService } from '../maintenance.service';
 import {IMyDpOptions} from 'mydatepicker';
@@ -21,7 +22,8 @@ export class AddMaintenanceComponent implements OnInit {
   addMaintenanceForm: FormGroup;
   maintenanceTypes: String[];
 
-  constructor(private fb: FormBuilder,
+  constructor(private router: Router, 
+    private fb: FormBuilder,
   private maintenanceService: MaintenanceService,
   private route: ActivatedRoute) {
     this.createForm();
@@ -69,6 +71,7 @@ submitForm() {
   const id = this.route.snapshot.paramMap.get('id');
   this.addMaintenanceForm.patchValue({vehicle: id});
   this.maintenanceService.saveMaintenance(this.addMaintenanceForm.value);
+  this.router.navigate(['/vehicles/detail/' + id]);
 }
 
 }

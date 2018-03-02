@@ -5,9 +5,9 @@
   <div class="addButton">
     <a routerLink="add" class="btn btn-primary">+</a>
   </div>
-  <div class="row">
-    
-      <ng-container *ngFor="let vehicle of vehicles | async">
+  <div *ngIf="vehicles | async; let vehicleItems">
+      <div class="row" *ngIf="vehicleItems.length > 0">
+        <ng-container *ngFor="let vehicle of vehicleItems">
           <div class="col-sm-6">
               <div class="card">
                   <img class="card-img-top" src="{{vehicle.image}}" alt="Card image cap">
@@ -19,5 +19,10 @@
                 </div>
           </div>
         </ng-container>
+      </div>
+      <div class="row" *ngIf="vehicleItems.length == 0">
+        <h2>Please add a vehicle</h2>
+      </div>
   </div>
+ 
 </div>

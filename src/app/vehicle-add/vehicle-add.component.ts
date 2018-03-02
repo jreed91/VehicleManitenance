@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SelectVehicleComponent } from '../select-vehicle/select-vehicle.component';
 import { VehicleDataService } from '../vehicledata.service';
 import { VehicleService } from '../vehicle.service';
@@ -6,6 +7,7 @@ import { Vehicle } from '../vehicle';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Years, Make, Model } from '../vehicleDataInterface';
 import { Observable } from '@firebase/util';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -21,14 +23,18 @@ export class VehicleAddComponent implements OnInit {
   yearsArray: Array<String>;
   keys: String[];
   models: Model;
+  user: String;
+  downloadURL: String;
 
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
   trimsAfterChangeEvent = [];
 
-  constructor(private fb: FormBuilder,
+  constructor(private router: Router,
+    private fb: FormBuilder,
     private vehicleDataService: VehicleDataService,
-  private vehicleService: VehicleService) {
+  private vehicleService: VehicleService,
+  public afAuth: AngularFireAuth) {
       this.createForm();
     }
 
@@ -38,13 +44,23 @@ export class VehicleAddComponent implements OnInit {
       name: '',
       year: '',
       manufacturer: '',
-      model: ''
+      model: '',
+      user: '',
+      image: ''
     });
   }
 
   ngOnInit() {
     this.getYears();
     this.getMakes();
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.afAuth.authState.subscribe(User => {
+      this.user = User.uid;
+      this.addVehicleForm.patchValue({user: this.user});
+    });
   }
 
   getYears(): void {
@@ -73,7 +89,6 @@ export class VehicleAddComponent implements OnInit {
     this.vehicleDataService.getModelsforYearandMake(selectedYear, selectedMake)
     .subscribe(resp => {
       const keys = resp.headers.keys();
-      console.log(resp.body);
       this.models = resp.body;
     });
   }
@@ -85,7 +100,16 @@ export class VehicleAddComponent implements OnInit {
   }
 
   submitForm() {
-    this.vehicleService.saveVehicle(this.addVehicleForm.value);
+    if (this.downloadURL != null) {
+      this.addVehicleForm.patchValue({image: this.downloadURL});
+      this.vehicleService.saveVehicle(this.addVehicleForm.value);
+    this.router.navigate(['/vehicles']);
+    }
+    
+  }
+
+  uploadFile(event) {
+    this.vehicleService.uploadImage(event).subscribe(url => this.downloadURL = url);
   }
 
 }

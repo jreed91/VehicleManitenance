@@ -1,26 +1,34 @@
 <div class="container">
   <form [formGroup]="addVehicleForm" (ngSubmit)="submitForm()">
-      <div class="form-row">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Vehicle Name" formControlName="name">
-        </div>
-      </div>
-      <div class="form-row">
-          <div class="col">
-            <select class="form-control" formControlName="year">
-              <option >Select a year...</option>
-              <option  *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
-            </select>
-            <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()" *ngIf="makes">
-                <option >Select a Manufacturer...</option>
-                <option  *ngFor="let item of makes.Results" [value]="item.Make_Name">{{item.Make_Name}}</option>
-              </select>
-            <select class="form-control" formControlName="model"  *ngIf="models">
-                <option >Select a Model...</option>
-                <option  *ngFor="let item of models.Results" [value]="item.Model_Name">{{item.Model_Name}}</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="form-group">
+      <label for="name">Vehicle Name:</label>
+      <input type="text" class="form-control" placeholder="That Old 'Stang" formControlName="name" id="name">
+    </div>
+    <div class="form-group">
+      <label for="name">Year:</label>
+      <select class="form-control" formControlName="year" id="year">
+        <option>Select a year...</option>
+        <option *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label *ngIf="makes" for="manufacturer">Manufacturer:</label>
+        <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()" *ngIf="makes" id="manufacturer">
+            <option>Select a Manufacturer...</option>
+            <option *ngFor="let item of makes.Results" [value]="item.Make_Name">{{item.Make_Name}}</option>
+          </select>
+    </div>
+   <div class="form-group">
+     <label for="model" *ngIf="models">Model:</label>
+      <select class="form-control" formControlName="model" *ngIf="models" id="model">
+          <option>Select a Model...</option>
+          <option *ngFor="let item of models.Results" [value]="item.Model_Name">{{item.Model_Name}}</option>
+        </select>
+   </div>
+   <div class="form-group">
+      <label for="imageUpload">Add an Image of that Sexy Beast:</label>
+      <input type="file" class="form-control-file" formControlName="model" id="imageUpload" (change)="uploadFile($event)">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
