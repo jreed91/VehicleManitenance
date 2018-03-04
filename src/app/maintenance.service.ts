@@ -22,6 +22,10 @@ export class MaintenanceService {
     return this.afs.collection<Maintenance>('Maintenance', ref => ref.where('vehicle', '==', vehicleId)).valueChanges();
   }
 
+  getLastMaintenanceItemForVehicle(vehicleId: string): Observable<Maintenance[]> {
+    return this.afs.collection<Maintenance>('Maintenance', ref => ref.where('vehicle', '==', vehicleId).orderBy('date').limit(1)).valueChanges();
+  }
+
   getAllMaintenanceTypes(): Observable<String[]> {
     return of(MAINTENANCEITEMS.map(value => value.type).filter((value, index, self) => self.indexOf(value) === index));
   }
@@ -29,5 +33,6 @@ export class MaintenanceService {
   saveMaintenance(maintenance: Maintenance): void {
     this.maintenanceCollection.add(maintenance);
   }
+  
 
 }

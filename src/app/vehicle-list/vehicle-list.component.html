@@ -1,28 +1,54 @@
 <div class="container">
   <div class="row">
-    <h2>My Vehicles</h2>
+    <div class="col-sm-1 col-md-6">
+      <h1 class="display-4">My Vehicles</h1>
+    </div>
+    <div class="col-sm-11 col-md-6">
+      <div class="float-right">
+        <a routerLink="add" class="btn btn-primary btn-md">Add a Vehicle
+          <span class="icon-plus"></span>
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="addButton">
-    <a routerLink="add" class="btn btn-primary">+</a>
-  </div>
-  <div *ngIf="vehicles | async; let vehicleItems">
+
+  <div>
+    <div *ngIf="vehicles | async; let vehicleItems">
       <div class="row" *ngIf="vehicleItems.length > 0">
         <ng-container *ngFor="let vehicle of vehicleItems">
-          <div class="col-sm-6">
-              <div class="card">
-                  <img class="card-img-top" src="{{vehicle.image}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">{{vehicle.name}}</h5>
-                    <p class="card-text">{{vehicle.year}} {{vehicle.manufacturer}} {{vehicle.model}}</p>
-                    <a routerLink="detail/{{vehicle.id}}" class="btn btn-primary">See Details</a>
+          <div class="col-md-6 col-sm-12">
+            <div class="card">
+              <img class="card-img-top" src="{{vehicle.image}}" alt="Card image cap">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h3>{{vehicle.year}} {{vehicle.manufacturer}} {{vehicle.model}}</h3>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="uppercaps">NEXT SERVICE</h6>
+                    <p class="card-attrs">
+                      <span class="icon-speedometer"></span> 199,000 miles</p>
+                    <p class="card-attrs">
+                      <span class="icon-calendar"></span> Jan 2, 2018</p>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <a routerLink="detail/{{vehicle.id}}" class="btn btn-primary float-right">See Details</a>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
           </div>
         </ng-container>
       </div>
       <div class="row" *ngIf="vehicleItems.length == 0">
         <h2>Please add a vehicle</h2>
       </div>
+    </div>
   </div>
- 
+
 </div>

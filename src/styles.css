@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.btn-primary {
+    background-color: white;
+    color: #007bff;
+}
+
+.btn {
+    border-radius: 0.50rem;
+}
+
+.card {
+    /* Rectangle 5: */
+background: #FFFFFF;
+border: 1px solid #E2E1E1;
+box-shadow: 0 2px 4px 0 rgba(0,0,0,0.13);
+border-radius: 4px;
+-webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+box-shadow: 0 4px 4px 0 rgba(0,0,0,0.13);
+}
+
+.uppercaps {
+    /* NEXT SERVICE: */
+font-family: OpenSans-Bold;
+font-size: 1rem;
+color: #9B9B9B;
+}
+
+.card-attrs {
+    /* 199,000 miles: */
+font-family: OpenSans-Light;
+font-size: 1.3rem;
+color: #4A4A4A;
+margin-bottom: .5rem;
+}
+.detailsButton {
+    margin-top: 100%;
+}
