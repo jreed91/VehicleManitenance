@@ -12,7 +12,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./add-maintenance.component.css']
 })
 export class AddMaintenanceComponent implements OnInit {
-  private placeholder: string = 'Select a date';
 
   public myDatePickerOptions: IMyDpOptions = {
     // other options...

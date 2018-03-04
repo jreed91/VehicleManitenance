@@ -2,7 +2,7 @@
     <form [formGroup]="addMaintenanceForm" (ngSubmit)="submitForm()">
         <div class="form-group">
             <label for="date">Select a Date:</label>
-            <my-date-picker name="date" [options]="myDatePickerOptions" [placeholder]="placeholder"  formControlName="date"></my-date-picker>
+            <my-date-picker name="date" [options]="myDatePickerOptions"  formControlName="date"></my-date-picker>
         </div>
         <div class="form-group">
             <label for="mileage">Mileage:</label>
