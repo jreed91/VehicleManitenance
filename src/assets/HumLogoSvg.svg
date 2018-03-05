@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="504px" height="273px" viewBox="0 0 504 273" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>VehicleMaintenance</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Hum-Logo" transform="translate(0.000000, 6.000000)">
+            <path d="M191.98481,36 C203.431451,14.5769023 226.013417,0 252,0 C277.986583,0 300.568549,14.5769023 312.01519,36 C324.994873,36 338.98981,36 354,36 L326.912863,240 L301.142795,240 C288.762998,252.940618 271.322684,261 252,261 C232.677316,261 215.237002,252.940618 202.857205,240 L177.087137,240 L150,36 C166.952974,36 179.907979,36 188.865016,36 C189.597082,36 190.637014,36 191.98481,36 Z" id="Combined-Shape" stroke="#424143" stroke-width="11" fill="#FFFFFF"></path>
+            <text id="hum" font-family="Fairview-SmallCaps, Fairview" font-size="120" font-weight="500" fill="#424143">
+                <tspan x="183" y="146">hum</tspan>
+            </text>
+            <polygon id="Rectangle-2" fill="#424143" points="0 81 160 81 160 111 8.12301845 111"></polygon>
+            <polygon id="Rectangle-2-Copy-2" fill="#424143" points="9 116 160 116 163.054032 146 16.6660987 146"></polygon>
+            <polygon id="Rectangle-2-Copy-3" fill="#424143" points="19 152 169 152 169 182 26.6153298 182"></polygon>
+            <polygon id="Rectangle-2-Copy" fill="#424143" transform="translate(424.000000, 96.000000) scale(-1, 1) translate(-424.000000, -96.000000) " points="344 81 504 81 504 111 352.123018 111"></polygon>
+            <polygon id="Rectangle-2-Copy-5" fill="#424143" transform="translate(417.027016, 131.000000) scale(-1, 1) translate(-417.027016, -131.000000) " points="340 116 491 116 494.054032 146 347.666099 146"></polygon>
+            <polygon id="Rectangle-2-Copy-4" fill="#424143" transform="translate(409.000000, 167.000000) scale(-1, 1) translate(-409.000000, -167.000000) " points="334 152 484 152 484 182 341.61533 182"></polygon>
+            <path d="M188,152 C189.324215,185.911275 217.471315,213 252,213 C286.528685,213 314.675785,185.911275 316,152 L188,152 Z" id="Combined-Shape" fill="#424143"></path>
+            <path d="M224,151 C224.570749,164.567259 236.702409,175.404945 251.584591,175.404945 C266.466774,175.404945 278.598434,164.567259 279.169183,151 L224,151 Z" id="Combined-Shape-Copy" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

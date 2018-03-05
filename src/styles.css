@@ -47,3 +47,33 @@ margin-bottom: .5rem;
 .detailsButton {
     margin-top: 100%;
 }
+
+.btn-google {
+    /* button bg: */
+background: #FFFFFF;
+box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+border-radius: 2px;
+font-size: 14px;
+color: rgba(0,0,0,0.54);
+letter-spacing: 0.22px;
+-webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.btn-google:hover {
+box-shadow: 0 0 4px 0 rgba(0,0,0,0.12), 0 4px 2px 0 rgba(0,0,0,0.24);
+}
+
+#Google-Button {
+    margin-left: 0;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 80vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
