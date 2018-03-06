@@ -25,13 +25,13 @@
                     <h3>{{vehicle.year}} {{vehicle.manufacturer}} {{vehicle.model}}</h3>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
+                <div class="row" *ngIf="maintenance | async; let maintenanceItems">
+                  <div class="col-md-6" *ngFor="let item of maintenanceItems">
                     <h6 class="uppercaps">NEXT SERVICE</h6>
                     <p class="card-attrs">
-                      <span class="icon-speedometer"></span> 199,000 miles</p>
+                      <span class="icon-speedometer"></span> {{item.futuremiles}} miles</p>
                     <p class="card-attrs">
-                      <span class="icon-calendar"></span> Jan 2, 2018</p>
+                      <span class="icon-calendar"></span> {{item.futuredate.formatted}}</p>
                   </div>
                   <div class="col-md-6 text-right">
                     <a routerLink="detail/{{vehicle.id}}" class="btn btn-primary float-right">See Details</a>

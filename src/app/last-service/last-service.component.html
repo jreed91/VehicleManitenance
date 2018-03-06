@@ -12,8 +12,12 @@
         <div class="col-sm-6">
           <p class="card-attrs">
             <span class="icon-tag"></span> {{item.price}}</p>
-          <p class="card-attrs">
+          <p class="card-attrs" *ngIf="item.type.length < 1; else multipleTypes">
             <span class="icon-wrench"></span> {{item.type}}</p>
+            <ng-template #multipleTypes>
+                <p class="card-attrs" *ngFor="let types of item.type">
+                    <span class="icon-wrench"></span> {{types.Type}}</p>
+            </ng-template>
         </div>
       </div>
       <div class="row">

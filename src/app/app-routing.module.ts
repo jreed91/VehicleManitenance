@@ -7,7 +7,7 @@ import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { AddMaintenanceComponent } from './add-maintenance/add-maintenance.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
+  { path: '', redirectTo: '/vehicles', pathMatch: 'full'},
   { path: 'vehicles', component: VehicleListComponent },
   { path: 'vehicles/add', component: VehicleAddComponent },
   { path: 'vehicles/detail/:id', component: VehicleDetailComponent },

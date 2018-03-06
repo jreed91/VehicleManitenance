@@ -5,6 +5,7 @@ import { MaintenanceService } from '../maintenance.service';
 import {IMyDpOptions} from 'mydatepicker';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MaintenanceType } from '../maintenance';
 
 @Component({
   selector: 'app-add-maintenance',
@@ -22,7 +23,7 @@ export class AddMaintenanceComponent implements OnInit {
 };
 
   addMaintenanceForm: FormGroup;
-  maintenanceTypes: String[];
+  maintenanceTypes: MaintenanceType[];
 
   constructor(private router: Router, 
     private fb: FormBuilder,
@@ -38,7 +39,9 @@ export class AddMaintenanceComponent implements OnInit {
       location: '',
       price: '',
       type: [],
-      vehicle: ''
+      vehicle: '',
+      futuredate: [null],
+      futuremiles: ''
     });
   }
 

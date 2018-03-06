@@ -24,7 +24,6 @@ export class LastServiceComponent implements OnInit {
   getLastMaintenanceItemForVehicle(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.maintenaceItem = this.maintenanceService.getLastMaintenanceItemForVehicle(id);
-    console.log(this.maintenaceItem);
   }
 
 

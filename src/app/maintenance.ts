@@ -8,3 +8,6 @@ export class Maintenance {
     vehicle: number;
   }
 
+export class MaintenanceType {
+  Type: String;
+}

@@ -28,7 +28,6 @@
           </thead>
           <tbody>
             <tr *ngFor="let maintenace of maintenaceItems | async">
-              {{maintenance}}
               <td>{{maintenace.date.formatted}}</td>
               <td>{{maintenace.mileage}}</td>
               <td>{{maintenace.location}}</td>
