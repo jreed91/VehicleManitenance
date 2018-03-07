@@ -23,6 +23,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { LastServiceComponent } from './last-service/last-service.component';
+import { NextServiceComponent } from './next-service/next-service.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { LastServiceComponent } from './last-service/last-service.component';
     VehicleAddComponent,
     SelectVehicleComponent,
     AddMaintenanceComponent,
-    LastServiceComponent
+    LastServiceComponent,
+    NextServiceComponent
   ],
   imports: [
     BrowserModule,
