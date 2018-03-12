@@ -23,6 +23,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class VehicleAddComponent implements OnInit {
 
+
   @ViewChild('instance') instance: NgbTypeahead;
 
 
@@ -45,6 +46,7 @@ export class VehicleAddComponent implements OnInit {
   makes: Make[] = Array<Make>();
   user: String;
   downloadURL: String;
+  manufacturer: any;
 
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
