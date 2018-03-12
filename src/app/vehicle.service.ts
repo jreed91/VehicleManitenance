@@ -48,9 +48,9 @@ export class VehicleService {
   }
 
   uploadImage(event): Observable<String> {
-
     const file = event.target.files[0];
-    const filePath = this.user + '/images';
+    const filename = file.name;
+    const filePath = this.user + '/images/' + filename;
     const task = this.storage.upload(filePath, file);
     // observe percentage changes
      this.uploadPercent = task.percentageChanges();

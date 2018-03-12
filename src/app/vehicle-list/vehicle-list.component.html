@@ -22,7 +22,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <h3>{{vehicle.year}} {{vehicle.manufacturer}} {{vehicle.model}}</h3>
+                    <h3>{{vehicle.year}} {{vehicle.manufacturer.Make_Name}} {{vehicle.model}}</h3>
                   </div>
                 </div>
                 <div class="row" *ngIf="maintenance | async; let maintenanceItems">

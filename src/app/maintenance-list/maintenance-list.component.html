@@ -3,15 +3,6 @@
       <div class="col-sm-1 col-md-4">
           <h2>Maintenance</h2>
         </div>
-      <div class="col-sm-11 col-md-8">
-          <div class="float-right">
-            <div class="addButton">
-              <a routerLink="addMaintenance" class="btn btn-primary btn-md">Add Maintenance
-                <span class="oi oi-plus"></span>
-              </a>
-            </div>
-          </div>
-        </div>
   </div>
   
   <div class="row">
@@ -32,7 +23,7 @@
               <td>{{maintenace.mileage}}</td>
               <td>{{maintenace.location}}</td>
               <td>{{maintenace.price}}</td>
-              <td>{{maintenace.type}}</td>
+              <td>{{maintenace.type[0].Type}}</td>
             </tr>
           </tbody>
         </table>

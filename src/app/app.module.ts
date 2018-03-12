@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
@@ -25,6 +26,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { LastServiceComponent } from './last-service/last-service.component';
 import { NextServiceComponent } from './next-service/next-service.component';
 
+import "rxjs/Rx"; 
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { NextServiceComponent } from './next-service/next-service.component';
     AngularFirestoreModule,
     HttpClientModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgbModule.forRoot()
   ],
   providers: [VehicleService, VehicleDataService, VehicleAddComponent, MaintenanceService],
   bootstrap: [AppComponent]

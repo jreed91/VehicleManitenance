@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SelectVehicleComponent } from '../select-vehicle/select-vehicle.component';
 import { VehicleDataService } from '../vehicledata.service';
@@ -6,8 +6,15 @@ import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Years, Make, Model } from '../vehicleDataInterface';
-import { Observable } from '@firebase/util';
+import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
+import {NgbTypeahead, NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -15,14 +22,27 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./vehicle-add.component.css']
 })
 export class VehicleAddComponent implements OnInit {
+
+  @ViewChild('instance') instance: NgbTypeahead;
+
+
+  search = (text$: Observable<string>) =>
+    text$
+      .debounceTime(200)
+      .distinctUntilChanged()
+      .map(term => term === '' ? ''
+        : this.makes.filter(v => v.Make_Name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+        formatter = (x: {Make_Name: string}) => x.Make_Name;
+  
+
   addVehicleForm: FormGroup;
 
   vehicles: Vehicle[];
   years: Years;
-  makes: Make;
   yearsArray: Array<String>;
   keys: String[];
   models: Model;
+  makes: Make[] = Array<Make>();
   user: String;
   downloadURL: String;
 
@@ -75,13 +95,13 @@ export class VehicleAddComponent implements OnInit {
     }
   }
 
+
   getMakes(): void {
     this.vehicleDataService.getMakes()
     .subscribe(resp => {
-      
       const keys = resp.headers.keys();
       // access the body directly, which is typed as `Config`.
-      this.makes = resp.body;
+       this.makes = resp.body.Results;
     });
   }
 
@@ -93,8 +113,8 @@ export class VehicleAddComponent implements OnInit {
     });
   }
 
-  manufacturerChanged() {
-    const manufacturer = this.addVehicleForm.get('manufacturer').value;
+  manufacturerChanged(e: NgbTypeaheadSelectItemEvent) {
+    const manufacturer = e.item.Make_Name;
     const year  = this.addVehicleForm.get('year').value;
     this.getModelsforYearandMake(year, manufacturer);
   }

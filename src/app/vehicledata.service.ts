@@ -26,7 +26,7 @@ export class VehicleDataService {
     return this.years
   }
 
-  getMakes(): Observable<HttpResponse<Make>> {
+  getMakes(): any {
     return this.http.get<Make>(this.baseUrl + 'getallmakes?format=json', {observe: 'response'});
   }
 

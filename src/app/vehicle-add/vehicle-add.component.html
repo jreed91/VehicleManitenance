@@ -13,10 +13,10 @@
     </div>
     <div class="form-group">
       <label *ngIf="makes" for="manufacturer">Manufacturer:</label>
-        <select class="form-control" formControlName="manufacturer" (change)="manufacturerChanged()" *ngIf="makes" id="manufacturer">
-            <option>Select a Manufacturer...</option>
-            <option *ngFor="let item of makes.Results" [value]="item.Make_Name">{{item.Make_Name}}</option>
-          </select>
+      <ng-template #rt let-r="result" let-t="term">
+          {{ r.Make_Name}}
+        </ng-template>
+      <input id="typeahead-manufacturer" type="text" class="form-control" formControlName="manufacturer" [(ngModel)]="manufacturer" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="manufacturerChanged($event)"/>
     </div>
    <div class="form-group">
      <label for="model" *ngIf="models">Model:</label>

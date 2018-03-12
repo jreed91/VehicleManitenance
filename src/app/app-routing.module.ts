@@ -5,6 +5,7 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { AddMaintenanceComponent } from './add-maintenance/add-maintenance.component';
+import { MaintenanceListComponent } from './maintenance-list/maintenance-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/vehicles', pathMatch: 'full'},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'vehicles/add', component: VehicleAddComponent },
   { path: 'vehicles/detail/:id', component: VehicleDetailComponent },
   { path: 'vehicles/detail/:id/addMaintenance', component: AddMaintenanceComponent },
+  { path: 'vehicles/detail/:id/maintenanceList', component: MaintenanceListComponent }
 ];
 
 @NgModule({
