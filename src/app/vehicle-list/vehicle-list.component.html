@@ -1,19 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-1 col-md-6">
+    <div class="col-sm-1 col-md-12">
       <h1 class="display-4">My Vehicles</h1>
-    </div>
-    <div class="col-sm-11 col-md-6">
-      <div class="float-right">
-        <a routerLink="add" class="btn btn-primary btn-md">Add a Vehicle
-          <span class="icon-plus"></span>
-        </a>
-      </div>
     </div>
   </div>
 
   <div>
-    <div *ngIf="vehicles | async; let vehicleItems">
+    <div *ngIf="vehicles | async; let vehicleItems; else novehicles">
       <div class="row" *ngIf="vehicleItems.length > 0">
         <ng-container *ngFor="let vehicle of vehicleItems">
           <div class="col-md-6 col-sm-12">
@@ -45,9 +38,12 @@
           </div>
         </ng-container>
       </div>
-      <div class="row" *ngIf="vehicleItems.length == 0">
-        <h2>Please add a vehicle</h2>
-      </div>
+      <ng-template #noVehicles></ng-template>
+      <div class="row">
+          <a routerLink="add" class="btn btn-primary btn-lg btn-block">Add a Vehicle
+            <span class="icon-plus"></span>
+          </a>
+        </div>
     </div>
   </div>
 

@@ -5,13 +5,13 @@
       <div class="row">
         <div class="col-sm-6">
           <p class="card-attrs">
-            <span class="icon-speedometer"></span> {{item.mileage}}</p>
+            <span class="icon-speedometer"></span> {{item.mileage}} miles</p>
           <p class="card-attrs">
             <span class="icon-calendar"></span> {{item.date.formatted}}</p>
         </div>
         <div class="col-sm-6">
           <p class="card-attrs">
-            <span class="icon-tag"></span> {{item.price}}</p>
+            <span class="icon-tag"></span> ${{item.price}}</p>
           <p class="card-attrs" *ngIf="item.type.length < 1; else multipleTypes">
             <span class="icon-wrench"></span> {{item.type}}</p>
             <ng-template #multipleTypes>
