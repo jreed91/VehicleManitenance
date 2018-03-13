@@ -78,6 +78,19 @@ box-shadow: 0 0 4px 0 rgba(0,0,0,0.12), 0 4px 2px 0 rgba(0,0,0,0.24);
   align-items: center;
 }
 
+.emptyStateText {
+    margin-top: 5px;
+    color: #4A90E2;
+    font-weight: 200;
+}
+
+.emptyState {
+    margin-top: 20%;
+}
+.emptyStateButton {
+    margin-bottom: 5rem;
+}
+
 @charset "UTF-8";
 
 /*!

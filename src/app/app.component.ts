@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 declare const FS: any;
+declare const mixpanel: any;
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,11 @@ export class AppComponent {
           displayName: user.displayName,
           phone: user.phoneNumber
         });
+        mixpanel.identify(user.uid);
+        mixpanel.people.set({
+          "$email": user.email,    // only special properties need the $
+          "$name": user.displayName
+      });
       }
     })
   }
