@@ -8,7 +8,7 @@ import { AddMaintenanceComponent } from './add-maintenance/add-maintenance.compo
 import { MaintenanceListComponent } from './maintenance-list/maintenance-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/vehicles', pathMatch: 'full'},
+  { path: '', redirectTo: 'vehicles', pathMatch: 'full'},
   { path: 'vehicles', component: VehicleListComponent },
   { path: 'vehicles/add', component: VehicleAddComponent },
   { path: 'vehicles/detail/:id', component: VehicleDetailComponent },

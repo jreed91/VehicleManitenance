@@ -1,6 +1,6 @@
 <div class="container">
   <div class="panel">
-    <img class="card-img-top" src="{{vehicle.image}}" alt="Card image cap">
+    <img class="card-img-top" *ngIf="vehicle.image" src="{{vehicle.image}}" alt="Card image cap">
     <div class="card-body">
       <h3 class="card-title">{{vehicle.year}} {{ vehicle.manufacturer.Make_Name }} {{vehicle.model}}</h3>
     </div>

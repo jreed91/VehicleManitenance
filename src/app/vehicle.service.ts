@@ -25,6 +25,9 @@ export class VehicleService {
     private storage: AngularFireStorage) {
     this.user = this.afAuth.auth.currentUser.uid;
     this.vehiclesCollection = afs.collection<Vehicle>('vehicles', ref => ref.where('user', '==', this.user));
+   }
+
+  getVehicles(): Observable<Vehicle[]> {
     this.vehicles = this.vehiclesCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Vehicle;
@@ -32,9 +35,6 @@ export class VehicleService {
         return { id, ...data };
       });
     });
-   }
-
-  getVehicles(): Observable<Vehicle[]> {
     return this.vehicles;
   }
 
