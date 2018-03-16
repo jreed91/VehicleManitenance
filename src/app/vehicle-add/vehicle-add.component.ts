@@ -4,12 +4,12 @@ import { SelectVehicleComponent } from '../select-vehicle/select-vehicle.compone
 import { VehicleDataService } from '../vehicledata.service';
 import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../vehicle';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Years, Make, Model } from '../vehicleDataInterface';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {NgbTypeahead, NgbTypeaheadSelectItemEvent} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs/Subject';
+import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
@@ -33,8 +33,8 @@ export class VehicleAddComponent implements OnInit {
       .distinctUntilChanged()
       .map(term => term === '' ? ''
         : this.makes.filter(v => v.Make_Name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
-        formatter = (x: {Make_Name: string}) => x.Make_Name;
-  
+  formatter = (x: { Make_Name: string }) => x.Make_Name;
+
 
   addVehicleForm: FormGroup;
 
@@ -46,7 +46,6 @@ export class VehicleAddComponent implements OnInit {
   makes: Make[] = Array<Make>();
   user: String;
   downloadURL: String;
-  manufacturer: any;
 
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
@@ -55,18 +54,18 @@ export class VehicleAddComponent implements OnInit {
   constructor(private router: Router,
     private fb: FormBuilder,
     private vehicleDataService: VehicleDataService,
-  private vehicleService: VehicleService,
-  public afAuth: AngularFireAuth) {
-      this.createForm();
-    }
+    private vehicleService: VehicleService,
+    public afAuth: AngularFireAuth) {
+    this.createForm();
+  }
 
   createForm() {
     this.yearsArray = [];
     this.addVehicleForm = this.fb.group({
-      name: '',
-      year: '',
-      manufacturer: '',
-      model: '',
+      name: ['', Validators.required],
+      year: ['', Validators.required],
+      manufacturer: ['', Validators.required],
+      model: ['', Validators.required],
       user: '',
       image: ''
     });
@@ -81,7 +80,7 @@ export class VehicleAddComponent implements OnInit {
   getUser(): void {
     this.afAuth.authState.subscribe(User => {
       this.user = User.uid;
-      this.addVehicleForm.patchValue({user: this.user});
+      this.addVehicleForm.patchValue({ user: this.user });
     });
   }
 
@@ -100,38 +99,50 @@ export class VehicleAddComponent implements OnInit {
 
   getMakes(): void {
     this.vehicleDataService.getMakes()
-    .subscribe(resp => {
-      const keys = resp.headers.keys();
-      // access the body directly, which is typed as `Config`.
-       this.makes = resp.body.Results;
-    });
+      .subscribe(resp => {
+        const keys = resp.headers.keys();
+        // access the body directly, which is typed as `Config`.
+        this.makes = resp.body.Results;
+      });
   }
 
   getModelsforYearandMake(selectedYear: String, selectedMake: String) {
     this.vehicleDataService.getModelsforYearandMake(selectedYear, selectedMake)
-    .subscribe(resp => {
-      const keys = resp.headers.keys();
-      this.models = resp.body;
-    });
+      .subscribe(resp => {
+        const keys = resp.headers.keys();
+        this.models = resp.body;
+      });
   }
 
   manufacturerChanged(e: NgbTypeaheadSelectItemEvent) {
     const manufacturer = e.item.Make_Name;
-    const year  = this.addVehicleForm.get('year').value;
+    const year = this.addVehicleForm.get('year').value;
     this.getModelsforYearandMake(year, manufacturer);
   }
 
   submitForm() {
-    if (this.downloadURL != null) {
-      this.addVehicleForm.patchValue({image: this.downloadURL});
-      this.vehicleService.saveVehicle(this.addVehicleForm.value);
-    this.router.navigate(['/vehicles']);
+    if (this.addVehicleForm.invalid) {
+      for (var i in this.addVehicleForm.controls) {
+        this.addVehicleForm.controls[i].markAsTouched();
+      }
+    } else {
+      if (this.downloadURL != null) {
+        this.addVehicleForm.patchValue({ image: this.downloadURL });
+        this.vehicleService.saveVehicle(this.addVehicleForm.value);
+        this.router.navigate(['/vehicles']);
+      } else {
+        
+      }
     }
-    
   }
 
   uploadFile(event) {
     this.vehicleService.uploadImage(event).subscribe(url => this.downloadURL = url);
   }
 
+  get name() { return this.addVehicleForm.get('name'); }
+  get year() { return this.addVehicleForm.get('year'); }
+  get model() { return this.addVehicleForm.get('model'); }
+  get manufacturer() { return this.addVehicleForm.get('manufacturer'); }
+  get image() { return this.addVehicleForm.get('image'); }
 }

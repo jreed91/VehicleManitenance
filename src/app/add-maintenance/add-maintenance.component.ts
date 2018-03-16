@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MaintenanceService } from '../maintenance.service';
 import {IMyDpOptions} from 'mydatepicker';
 import { ActivatedRoute } from '@angular/router';
@@ -35,11 +35,11 @@ export class AddMaintenanceComponent implements OnInit {
    createForm() {
     this.addMaintenanceForm = this.fb.group({
       date: [null],
-      mileage: '',
-      location: '',
-      price: '',
+      mileage: ['', Validators.required],
+      location: ['', Validators.required],
+      price: ['', Validators.required],
       type: [],
-      vehicle: '',
+      vehicle: ['', Validators.required],
       futuredate: [null],
       futuremiles: ''
     });
@@ -73,10 +73,22 @@ clearDate(): void {
 }
 
 submitForm() {
-  const id = this.route.snapshot.paramMap.get('id');
-  this.addMaintenanceForm.patchValue({vehicle: id});
-  this.maintenanceService.saveMaintenance(this.addMaintenanceForm.value);
-  this.router.navigate(['/vehicles/detail/' + id]);
+  if (this.addMaintenanceForm.invalid) {
+    for (var i in this.addMaintenanceForm.controls) {
+      this.addMaintenanceForm.controls[i].markAsTouched();
+    }
+  } else {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.addMaintenanceForm.patchValue({vehicle: id});
+    this.maintenanceService.saveMaintenance(this.addMaintenanceForm.value);
+    this.router.navigate(['/vehicles/detail/' + id]);
+  }
+ 
 }
 
+get date() { return this.addMaintenanceForm.get('date'); }
+get mileage() { return this.addMaintenanceForm.get('mileage'); }
+get location() { return this.addMaintenanceForm.get('location'); }
+get price() { return this.addMaintenanceForm.get('price'); }
+get vehicle() { return this.addMaintenanceForm.get('vehicle'); }
 }

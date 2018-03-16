@@ -1,22 +1,40 @@
 <div class="container">
     <h3>Add Service</h3>
-    <form [formGroup]="addMaintenanceForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="addMaintenanceForm" (ngSubmit)="submitForm()" #formDir="ngForm">
         <div class="form-group">
             <label for="date">Select a Date:</label>
-            <my-date-picker name="date" [options]="myDatePickerOptions" formControlName="date"></my-date-picker>
+            <my-date-picker name="date" [options]="myDatePickerOptions" formControlName="date" required></my-date-picker>
+        </div>
+        <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
+
+            <div *ngIf="date.errors.required">
+                Date is required.
+            </div>
         </div>
         <div class="form-group">
             <label for="mileage">Mileage:</label>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="199,000" formControlName="mileage">
+                <input type="text" class="form-control" placeholder="199,000" formControlName="mileage" required>
                 <div class="input-group-append">
                     <div class="input-group-text">miles</div>
                 </div>
             </div>
         </div>
+        <div *ngIf="mileage.invalid && (mileage.dirty || mileage.touched)" class="alert alert-danger">
+
+            <div *ngIf="mileage.errors.required">
+                Mileage is required.
+            </div>
+        </div>
         <div class="form-group">
             <label for="location">Location:</label>
-            <input type="text" class="form-control" placeholder="Firestone" formControlName="location">
+            <input type="text" class="form-control" placeholder="Firestone" formControlName="location" required>
+        </div>
+        <div *ngIf="location.invalid && (location.dirty || location.touched)" class="alert alert-danger">
+
+            <div *ngIf="location.errors.required">
+                Location is required.
+            </div>
         </div>
         <div class="form-group">
             <label for="price">Price:</label>
@@ -24,7 +42,13 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">$</div>
                 </div>
-                <input type="text" class="form-control" placeholder="19.99" formControlName="price">
+                <input type="text" class="form-control" placeholder="19.99" formControlName="price" required>
+            </div>
+        </div>
+        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+
+            <div *ngIf="price.errors.required">
+                Price is required.
             </div>
         </div>
         <div class="form-group">
@@ -34,6 +58,7 @@
                 <option *ngFor="let item of maintenanceTypes" [value]="item">{{item.Type}}</option>
             </select>
         </div>
+
         <br>
         <br>
         <h5>When's Your Next Service?</h5>
@@ -42,13 +67,13 @@
             <my-date-picker name="future-date" [options]="myDatePickerOptions" formControlName="futuredate"></my-date-picker>
         </div>
         <div class="form-group">
-                <label for="mileage">Next Service Mileage:</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="199,000" formControlName="futuremiles">
-                    <div class="input-group-append">
-                        <div class="input-group-text">miles</div>
-                    </div>
+            <label for="mileage">Next Service Mileage:</label>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="199,000" formControlName="futuremiles">
+                <div class="input-group-append">
+                    <div class="input-group-text">miles</div>
                 </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

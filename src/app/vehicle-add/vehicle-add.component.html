@@ -1,33 +1,59 @@
 <div class="container">
-  <form [formGroup]="addVehicleForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="addVehicleForm" (ngSubmit)="submitForm()" #formDir="ngForm">
     <div class="form-group">
       <label for="name">Vehicle Name:</label>
-      <input type="text" class="form-control" placeholder="That Old 'Stang" formControlName="name" id="name">
+      <input type="text" class="form-control" placeholder="That Old 'Stang" formControlName="name" id="name" required>
+    </div>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+      <div *ngIf="name.errors.required">
+        Name is required.
+      </div>
     </div>
     <div class="form-group">
       <label for="name">Year:</label>
-      <select class="form-control" formControlName="year" id="year">
+      <select class="form-control" formControlName="year" id="year" required>
         <option>Select a year...</option>
         <option *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
       </select>
     </div>
+    <div *ngIf="year.invalid && (year.dirty || year.touched)" class="alert alert-danger">
+
+      <div *ngIf="year.errors.required">
+        Year is required.
+      </div>
+    </div>
     <div class="form-group">
       <label *ngIf="makes" for="manufacturer">Manufacturer:</label>
       <ng-template #rt let-r="result" let-t="term">
-          {{ r.Make_Name}}
-        </ng-template>
-      <input id="typeahead-manufacturer" type="text" class="form-control" formControlName="manufacturer" [(ngModel)]="manufacturer" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="manufacturerChanged($event)"/>
+        {{ r.Make_Name}}
+      </ng-template>
+      <input id="typeahead-manufacturer" type="text" class="form-control" formControlName="manufacturer" [(ngModel)]="manufacturer"
+        [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="manufacturerChanged($event)"
+      />
     </div>
-   <div class="form-group">
-     <label for="model" *ngIf="models">Model:</label>
+    <div *ngIf="manufacturer.invalid && (manufacturer.dirty || manufacturer.touched)" class="alert alert-danger">
+
+      <div *ngIf="manufacturer.errors.required">
+        Manufacturer is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="model" *ngIf="models">Model:</label>
       <select class="form-control" formControlName="model" *ngIf="models" id="model">
-          <option>Select a Model...</option>
-          <option *ngFor="let item of models.Results" [value]="item.Model_Name">{{item.Model_Name}}</option>
-        </select>
-   </div>
-   <div class="form-group">
+        <option>Select a Model...</option>
+        <option *ngFor="let item of models.Results" [value]="item.Model_Name">{{item.Model_Name}}</option>
+      </select>
+    </div>
+    <div *ngIf="model.invalid && (model.dirty || model.touched) && model.length > 1" class="alert alert-danger">
+
+      <div *ngIf="model.errors.required">
+        Model is required.
+      </div>
+    </div>
+    <div class="form-group">
       <label for="imageUpload">Add an Image of that Sexy Beast:</label>
-      <input type="file" class="form-control-file" formControlName="model" id="imageUpload" (change)="uploadFile($event)">
+      <input type="file" class="form-control-file" formControlName="model" id="imageUpload" (change)="uploadFile($event)" required>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
