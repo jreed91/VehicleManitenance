@@ -39,7 +39,7 @@ export class AddMaintenanceComponent implements OnInit {
       location: ['', Validators.required],
       price: ['', Validators.required],
       type: [],
-      vehicle: ['', Validators.required],
+      vehicle: '',
       futuredate: [null],
       futuremiles: ''
     });

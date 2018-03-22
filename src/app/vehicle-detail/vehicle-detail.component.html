@@ -1,14 +1,36 @@
-<div class="container">
-  <div class="panel">
-    <img class="card-img-top" *ngIf="vehicle.image" src="{{vehicle.image}}" alt="Card image cap">
-    <div class="card-body">
-      <h3 class="card-title">{{vehicle.year}} {{ vehicle.manufacturer.Make_Name }} {{vehicle.model}}</h3>
+
+  <div class="jumbotron jumbotron-fluid" [ngStyle]="{'background':'linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ),url('+vehicle.image+')', 'background-position':'center', 'background-size': 'cover'}">
+    <div class="container">
+      <h1 class="display-4">{{ vehicle.year }} {{ vehicle.manufacturer.Make_Name }} {{vehicle.model}}</h1>
     </div>
   </div>
-  <app-last-service></app-last-service><br>
-  <app-next-service></app-next-service><br>
-  <div class="col-md-12 text-center">
-      <a routerLink="addMaintenance" class="btn btn-primary btn-lg btn-block fixed-bottom">
-        Add Service <span class="icon-plus"></span></a>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="card-title">Service History</h3>
+      </div>
+      <div class="col-md-8">
+        <a routerLink="addMaintenance" class="btn btn-primary btn-lg float-right">
+          Add Service
+          <span class="icon-plus"></span>
+        </a>
+      </div>
+    </div><br>
+
+<div class="row align-items-start">
+  <div class="col">
+    <div class="float-right">
+
     </div>
+  </div>
+
 </div>
+
+<app-last-service></app-last-service>
+<br>
+<app-next-service></app-next-service>
+<br>
+<app-price-history-card></app-price-history-card>

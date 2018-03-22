@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppComponent } from './app.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
@@ -26,7 +29,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { LastServiceComponent } from './last-service/last-service.component';
 import { NextServiceComponent } from './next-service/next-service.component';
 
-import "rxjs/Rx"; 
+import "rxjs/Rx";
+import { PriceHistoryCardComponent } from './price-history-card/price-history-card.component'; 
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import "rxjs/Rx";
     SelectVehicleComponent,
     AddMaintenanceComponent,
     LastServiceComponent,
-    NextServiceComponent
+    NextServiceComponent,
+    PriceHistoryCardComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,9 @@ import "rxjs/Rx";
     HttpClientModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [VehicleService, VehicleDataService, VehicleAddComponent, MaintenanceService],
   bootstrap: [AppComponent]

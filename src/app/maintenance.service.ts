@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-
 import { Maintenance, MaintenanceType } from './maintenance';
-import { MAINTENANCEITEMS } from './mock-maintenance';
+
 
 @Injectable()
 export class MaintenanceService {
@@ -37,6 +36,5 @@ export class MaintenanceService {
   saveMaintenance(maintenance: Maintenance): void {
     this.maintenanceCollection.add(maintenance);
   }
-  
 
 }
