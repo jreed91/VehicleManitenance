@@ -28,12 +28,11 @@
       <ng-template #rt let-r="result" let-t="term">
         {{ r.Make_Name}}
       </ng-template>
-      <input id="typeahead-manufacturer" type="text" class="form-control" formControlName="manufacturer" [(ngModel)]="manufacturer"
+      <input id="typeahead-manufacturer" type="text" class="form-control" formControlName="manufacturer"
         [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="manufacturerChanged($event)"
       />
     </div>
     <div *ngIf="manufacturer.invalid && (manufacturer.dirty || manufacturer.touched)" class="alert alert-danger">
-
       <div *ngIf="manufacturer.errors.required">
         Manufacturer is required.
       </div>
@@ -45,16 +44,22 @@
         <option *ngFor="let item of models.Results" [value]="item.Model_Name">{{item.Model_Name}}</option>
       </select>
     </div>
-    <div *ngIf="model.invalid && (model.dirty || model.touched) && model.length > 1" class="alert alert-danger">
-
+    <div *ngIf="model.invalid && (model.dirty || model.touched)" class="alert alert-danger">
       <div *ngIf="model.errors.required">
         Model is required.
       </div>
     </div>
     <div class="form-group">
-      <label for="imageUpload">Add an Image of that Sexy Beast:</label>
-      <input type="file" class="form-control-file" formControlName="model" id="imageUpload" (change)="uploadFile($event)" required>
+      <label for="imageUpload">Add an Image:</label>
+      <input type="file" class="form-control-file" id="imageUpload" (change)="uploadFile($event)">
+      <input type="hidden" name="fileHidden" formControlName="imageInput"/>
     </div>
+    <div *ngIf="imageInput.invalid && (imageInput.dirty || imageInput.touched)" class="alert alert-danger">
+      <div *ngIf="imageInput.errors.required">
+        Image is required.
+      </div>
+    </div>
+    
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

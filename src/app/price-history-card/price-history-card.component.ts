@@ -27,6 +27,7 @@ export class PriceHistoryObject {
 export class PriceHistoryCardComponent implements OnInit {
   maintenaceItem: Observable<Maintenance[]>;
   priceHistoryData: any[];
+  priceHistoryData2: any[];
   totalPrice: any[];
   sum: Number;
   

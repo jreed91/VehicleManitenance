@@ -16,6 +16,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+
 @Component({
   selector: 'app-vehicle-add',
   templateUrl: './vehicle-add.component.html',
@@ -46,7 +47,8 @@ export class VehicleAddComponent implements OnInit {
   makes: Make[] = Array<Make>();
   user: String;
   downloadURL: String;
-
+  filename: String;
+  
   manufacturersAfterChangeEvent = [];
   modelsAfterChangeEvent = [];
   trimsAfterChangeEvent = [];
@@ -57,9 +59,11 @@ export class VehicleAddComponent implements OnInit {
     private vehicleService: VehicleService,
     public afAuth: AngularFireAuth) {
     this.createForm();
+    
   }
 
   createForm() {
+    this.filename = '';
     this.yearsArray = [];
     this.addVehicleForm = this.fb.group({
       name: ['', Validators.required],
@@ -67,6 +71,7 @@ export class VehicleAddComponent implements OnInit {
       manufacturer: ['', Validators.required],
       model: ['', Validators.required],
       user: '',
+      imageInput: [this.filename, Validators.required],
       image: ''
     });
   }
@@ -130,19 +135,19 @@ export class VehicleAddComponent implements OnInit {
         this.addVehicleForm.patchValue({ image: this.downloadURL });
         this.vehicleService.saveVehicle(this.addVehicleForm.value);
         this.router.navigate(['/vehicles']);
-      } else {
-        
       }
     }
   }
 
   uploadFile(event) {
     this.vehicleService.uploadImage(event).subscribe(url => this.downloadURL = url);
+    let file = event.target.files[0];
+    this.addVehicleForm.controls['imageInput'].setValue(file ? file.name : '');
   }
 
   get name() { return this.addVehicleForm.get('name'); }
   get year() { return this.addVehicleForm.get('year'); }
   get model() { return this.addVehicleForm.get('model'); }
   get manufacturer() { return this.addVehicleForm.get('manufacturer'); }
-  get image() { return this.addVehicleForm.get('image'); }
+  get imageInput() { return this.addVehicleForm.get('imageInput'); }
 }
